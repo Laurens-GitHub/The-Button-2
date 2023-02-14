@@ -17,14 +17,18 @@ app.get('/', (req, res) => {
   res.send('Welcome!')
 });
 
-const bucketParams = {
-  Bucket: 'soundsforthebutton',
-  Key: 'Samwise Potatoes.mp3',
-};
+function randomChoice(arr) {
+  return arr[Math.floor(arr.length * Math.random())];
+}
+
+const options = ['Beullers_A_day_like_this.mp3', 'Firefly_Shooting.mp3', 'Futurama_Good_News!_77.mp3', 'LOTR_Samwise_Potatoes.mp3', 'Rick_and_Morty_Wubba_Lubba_Dub_Dub.mp3']
 
 const getSoundUrl = async () => {
   try {
-      const command = new GetObjectCommand(bucketParams);
+      const command = new GetObjectCommand({
+        Bucket: 'soundsforthebutton',
+        Key: randomChoice(options),
+      });
       // Create the presigned URL.
       const signedUrl = await getSignedUrl(s3Client, command, {expiresIn: 36000});
       const response = await fetch(signedUrl);
