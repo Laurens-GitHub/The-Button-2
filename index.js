@@ -12,11 +12,6 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(cors())
 
-// homepage
-app.get('/', (req, res) => {
-  res.send('Welcome!')
-});
-
 function randomChoice(arr) {
   return arr[Math.floor(arr.length * Math.random())];
 }
@@ -26,11 +21,11 @@ const options = ['Beullers_A_day_like_this.mp3', 'Firefly_Shooting.mp3', 'Futura
 const getSoundUrl = async () => {
   try {
       const command = new GetObjectCommand({
-        Bucket: 'soundsforthebutton',
+        Bucket: 'soundsforthebutton2',
         Key: randomChoice(options),
       });
       // Create the presigned URL.
-      const signedUrl = await getSignedUrl(s3Client, command, {expiresIn: 36000});
+      const signedUrl = await getSignedUrl(s3Client, command, {expiresIn: 3600});
       const response = await fetch(signedUrl);
       const url = await response;
       return await url['url']
@@ -41,8 +36,15 @@ const getSoundUrl = async () => {
   };
 };
 
+// homepage
+app.get('/', (req, res) => {
+  res.send('Welcome!')
+});
+
+// fetch sound url
 app.get('/get', async (req, res) => {
   res.send(String(await getSoundUrl()))
 });
 
+// launch API
 app.listen('3001', () => { })
