@@ -81,7 +81,20 @@ class App extends React.Component {
   };
 
   render() {
-    return <button onClick={this.handleClick}>Play Sound</button>;
+    return (
+      <div class="mainButton">
+        <button
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+          onClick={this.handleClick}
+        >
+          Play Sound
+        </button>
+      </div>
+    );
   }
 }
 
