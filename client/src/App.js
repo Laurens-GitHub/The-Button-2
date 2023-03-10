@@ -83,21 +83,25 @@ class App extends React.Component {
 
   render() {
     return (
-      <div class="mainButton">
-        <Button
-          variant="contained"
-          sx={{
-            width: 100,
-            height: 100,
-            backgroundColor: "red",
-            borderRadius: 50,
-            border: "5px solid",
-            borderColor: "black",
-          }}
-          onClick={this.handleClick}
-        >
-          Play Sound
-        </Button>
+      <div className="mainButton">
+        <div className="buttonBorder">
+          <Button
+            variant="contained"
+            className="Button"
+            sx={{
+              width: 100,
+              height: 100,
+              backgroundColor: "red",
+              borderRadius: 50,
+              ":hover": {bgcolor: "#C00101"},
+              // border: "5px solid",
+              // borderColor: "black",
+            }}
+            // onClick={this.handleClick}
+          >
+            Play Sound
+          </Button>
+        </div>
       </div>
     );
   }
